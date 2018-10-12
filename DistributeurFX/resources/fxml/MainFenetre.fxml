@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<?import java.lang.Integer?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainFenetre">
+    <fx:define>
+        <Integer fx:id="moins1" fx:value="-1" />
+    </fx:define>
+   <center>
+      <SplitPane dividerPositions="0.5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0">
+         <items>
+            <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                   <Label text="Boisson">
+                       <font>
+                           <Font name="System Bold" size="12.0" />
+                       </font>
+                   </Label>
+                  <ListView fx:id="listViewBoissons" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <TextField fx:id="tfieldBoisson">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button disable="${listViewBoissons.selectionModel.selectedIndex == moins1}" text="Supprimer Boisson" onAction="#supprimerBoisson" />
+               </children>
+            </VBox>
+            <VBox disable="${listViewBoissons.selectionModel.selectedIndex == moins1}" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                   <Label text="Ingrédient">
+                       <font>
+                           <Font name="System Bold" size="12.0" />
+                       </font>
+                   </Label>
+                  <ListView fx:id="listViewIngredients" items="${listViewBoissons.selectionModel.selectedItem.ingredientsVM}" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <TextField fx:id="tfieldIngredient">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button disable="${listViewIngredients.selectionModel.selectedIndex == moins1}" text="Supprimer Ingrédient" onAction="#supprimerIngr" />
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Menu">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#addBoisson" text="Ajouter boisson" />
+                  <MenuItem disable="${listViewBoissons.selectionModel.selectedIndex == moins1}" mnemonicParsing="false" onAction="#addIngr" text="Ajouter ingrédient" />
+               <MenuItem mnemonicParsing="false" onAction="#save" text="Sauvegarder" />
+               <MenuItem mnemonicParsing="false" onAction="#load" text="Charger" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Aide">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#about" text="A propos" />
+              <MenuItem mnemonicParsing="false" onAction="#quit" text="Quitter" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
