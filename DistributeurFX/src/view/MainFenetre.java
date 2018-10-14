@@ -67,7 +67,6 @@ public class MainFenetre {
         // this.listViewIngredients.itemsProperty().bind(this.listViewBoissons.getSelectionModel().getSelectedItem().ingredientsVMProperty());
 
         this.listViewIngredients.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
-            // TODO unbindBidir sur getNomProperty a fonctionné... pquoi ??
             if (oldV != null) {
                 this.tfieldIngredient.textProperty().unbindBidirectional(oldV.nomIngrProperty());
                 this.tfieldIngredient.setText("");

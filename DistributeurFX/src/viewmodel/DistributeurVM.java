@@ -54,6 +54,7 @@ public class DistributeurVM implements PropertyChangeListener {
         Loader loader = new LoaderBinary();
         Distributeur dis = (Distributeur) loader.load("distributeur.txt");
         this.model.removePropertyChangeListener(this);
+        this.boissonsVMObs.clear();
         this.model = dis;
         this.initModel();
     }
